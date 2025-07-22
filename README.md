@@ -23,6 +23,9 @@ cargo build --release
 
 ## Installing
 1. Change into the directory which contains the `desktoplauncher` binary. If built from source, this would be `target/release/`.
+```bash
+cd target/release/
+```
 
 2. Copy the binary to `/usr/local/bin`, or any directory in `$PATH`.
 ```bash
@@ -31,7 +34,7 @@ sudo cp desktoplauncher /usr/local/bin/desktoplauncher
 
 3. At the end of your default shell's rc file (e.g `~/.bashrc` for bash, `~/.zshrc` for zsh), make `desktoplauncher` run if the current TTY is `/dev/tty1`, or whichever TTY you want it to run on.
 ```bash
-if [[ "$TTY" == "/dev/tty1" ]]; then
+if [[ "$(tty)" == "/dev/tty1" ]]; then
     desktoplauncher
 fi
 ```

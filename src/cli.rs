@@ -6,7 +6,7 @@ use std::io;
 
 #[inline(always)]
 pub fn print_prompt() {
-    println!("Select a desktop environment. Leave blank to return to tty.\n");
+    println!("Select a desktop environment. Leave blank to return to TTY.\n");
 }
 
 #[inline(always)]

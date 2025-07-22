@@ -30,7 +30,7 @@ fn main() {
         Command::new("/bin/sh")
                 .arg("-c")
                 .arg(session.exec)
-                .output()
+                .spawn()
                 .expect("Failed to start selection.");
     }
 

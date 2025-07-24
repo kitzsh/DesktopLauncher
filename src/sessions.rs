@@ -30,7 +30,7 @@ pub fn push_from<T: AsRef<Path>>(sessions: &mut Vec<Session>, path: T) {
 #[inline(always)]
 pub fn push_all(sessions: &mut Vec<Session>) {
     push_from(sessions, "/usr/share/wayland-sessions");
-    push_from(sessions, "/usr/share/xsessions");
+    //push_from(sessions, "/usr/share/xsessions");
 }
 
 #[inline(always)]

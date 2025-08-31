@@ -1,12 +1,9 @@
 # DesktopLauncher
 
-> [!NOTE]
-> Most X11 desktop environments currently don't work with this, due to some extra initialisation requirements. Support is in development.
-
-DesktopLauncher is a simple command line display manager which lets the user select and start a Wayland ~~or X11~~ session after logging in.
+DesktopLauncher is a simple command line display manager which lets the user select and start a Wayland or X11 session after logging in.
 
 ## Features
-- Lists all available Wayland ~~and X11~~ sessions
+- Lists all available Wayland and X11 sessions
 - Saves the previous selection for easy access
 - Simple and fast
 

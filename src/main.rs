@@ -12,13 +12,13 @@ fn main() {
 
     let _ = fs::create_dir_all(&config_dir);
     
-    sessions::push_recent(&mut sessions, &config_dir);
+    let recent = sessions::get_recent(&config_dir);
     sessions::push_all(&mut sessions);
 
-    cli::print_prompt();
+    cli::print_prompt(&recent);
     cli::print_sessions(&sessions);
 
-    let session = cli::get_input(&sessions);
+    let session = cli::get_input(&sessions, &recent);
     if is_dummy(&session) {
         println!("No session selected, exiting to TTY.");
         return;
@@ -27,11 +27,26 @@ fn main() {
     config::set_recent(&session, &config_dir);
 
     if config::try_exec(&session.try_exec) {
+        let exec: String;
+        if session.is_x11 {
+            // uncommon edge case, but good to have here anyway
+            if session.exec.contains(char::is_whitespace) {
+                exec = format!("TMP=$(mktemp /tmp/desktoplauncher.XXXX)\necho \"rm $TMP && {}\" > $TMP\nexec startx $TMP", session.exec);
+            }
+            else {
+                exec = format!("exec startx $(which {})", session.exec);
+            }
+        }
+        else {
+            exec = format!("exec {}", session.exec);
+        }
+
+        println!("Starting {}...", session.name);
+
         Command::new("/bin/sh")
                 .arg("-c")
-                .arg(session.exec)
+                .arg(exec)
                 .spawn()
                 .expect("Failed to start selection.");
     }
-
 }
